@@ -6,26 +6,26 @@ import Header from '../components/Header.jsx';
 
 const MESSAGES = {
   submitted: {
-    title: 'Examen termine avec succes',
-    body: "Merci d'avoir passe l'examen de Data Science. Vos reponses ont bien ete enregistrees.",
+    title: 'Examen terminé avec succès',
+    body: "Merci d'avoir passé l'examen de Data Science. Vos réponses ont bien été enregistrées.",
     icon: Check,
     tone: 'success',
   },
   time_up: {
-    title: 'Temps ecoule',
-    body: "Le temps imparti pour l'examen est termine. Vos reponses ont ete enregistrees automatiquement.",
+    title: 'Temps écoulé',
+    body: "Le temps imparti pour l'examen est terminé. Vos réponses ont été enregistrées automatiquement.",
     icon: Clock,
     tone: 'warning',
   },
   already: {
-    title: 'Examen deja complete',
-    body: 'Vous avez deja passe cet examen. Une seule tentative est autorisee par etudiant.',
+    title: 'Examen déjà passé',
+    body: 'Vous avez déjà passé cet examen. Une seule tentative est autorisée par étudiant.',
     icon: Info,
     tone: 'info',
   },
   default: {
-    title: 'Session terminee',
-    body: 'Votre session a ete cloturee.',
+    title: 'Session terminée',
+    body: 'Votre session a été clôturée.',
     icon: Check,
     tone: 'success',
   },
@@ -69,10 +69,10 @@ export default function ExamComplete() {
             <h2>{message.title}</h2>
             <p className="muted mt-16">{message.body}</p>
             <p className="muted mt-24 countdown-note">
-              Vous allez etre redirige automatiquement dans {countdown}s...
+              Vous allez être redirigé automatiquement dans {countdown}s...
             </p>
             <button className="btn btn-outline mt-16" onClick={() => navigate('/', { replace: true })}>
-              Retour a l'accueil
+              Retour à l'accueil
             </button>
           </div>
         </div>

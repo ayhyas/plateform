@@ -4,7 +4,7 @@ function errorHandler(err, req, res, next) {
   console.error(err);
 
   if (err.code === 11000) {
-    return res.status(409).json({ message: 'Un etudiant avec ce CNE a deja une tentative enregistree.' });
+    return res.status(409).json({ message: 'Un étudiant avec ce CNE a déjà une tentative enregistrée.' });
   }
 
   if (err.name === 'ValidationError') {

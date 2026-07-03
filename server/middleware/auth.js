@@ -24,7 +24,7 @@ async function studentAuth(req, res, next) {
     req.attempt = attempt;
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Session expiree ou invalide' });
+    return res.status(401).json({ message: 'Session expirée ou invalide' });
   }
 }
 
@@ -35,13 +35,13 @@ function adminAuth(req, res, next) {
 
     const payload = verifyToken(token);
     if (payload.role !== 'admin') {
-      return res.status(403).json({ message: 'Acces refuse' });
+      return res.status(403).json({ message: 'Accès refusé' });
     }
 
     req.admin = true;
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Session expiree ou invalide' });
+    return res.status(401).json({ message: 'Session expirée ou invalide' });
   }
 }
 

@@ -44,7 +44,7 @@ async function listStudents(req, res) {
 async function deleteStudent(req, res) {
   const attempt = await Attempt.findByIdAndDelete(req.params.id);
   if (!attempt) return res.status(404).json({ message: 'Tentative introuvable.' });
-  res.json({ message: 'Tentative supprimee.' });
+  res.json({ message: 'Tentative supprimée.' });
 }
 
 // GET /api/admin/export
@@ -103,7 +103,7 @@ async function updateQuestion(req, res) {
 async function deleteQuestion(req, res) {
   const question = await Question.findByIdAndDelete(req.params.id);
   if (!question) return res.status(404).json({ message: 'Question introuvable.' });
-  res.json({ message: 'Question supprimee.' });
+  res.json({ message: 'Question supprimée.' });
 }
 
 // ---- Settings ----
@@ -122,6 +122,7 @@ async function updateSettings(req, res) {
     'university',
     'faculty',
     'degree',
+    'professor',
     'startAt',
     'endAt',
     'durationMinutes',

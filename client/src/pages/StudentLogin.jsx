@@ -29,7 +29,7 @@ export default function StudentLogin() {
       })
       .catch(() => {
         if (!mounted) return;
-        setStatusMessage("Impossible de contacter le serveur. Reessayez plus tard.");
+        setStatusMessage('Impossible de contacter le serveur. Réessayez plus tard.');
         setIsOpen(false);
       })
       .finally(() => mounted && setLoadingStatus(false));
@@ -66,7 +66,7 @@ export default function StudentLogin() {
         navigate('/exam/termine', { state: { reason: 'already' } });
         return;
       }
-      setError(data?.message || "Une erreur est survenue. Veuillez reessayer.");
+      setError(data?.message || 'Une erreur est survenue. Veuillez réessayer.');
     } finally {
       setSubmitting(false);
     }
@@ -88,10 +88,10 @@ export default function StudentLogin() {
                 </div>
               )}
 
-              <h2 className="mb-16">Acces a l'examen</h2>
+              <h2 className="mb-16">Accès à l'examen</h2>
               <p className="muted mb-16">
-                Veuillez saisir vos informations exactement comme sur votre carte d'etudiant pour
-                acceder a l'examen.
+                Veuillez saisir vos informations exactement comme sur votre carte d'étudiant pour
+                accéder à l'examen.
               </p>
 
               {error && (
@@ -114,12 +114,12 @@ export default function StudentLogin() {
                         value={form.nom}
                         onChange={(e) => updateField('nom', e.target.value)}
                         disabled={!isOpen || submitting}
-                        placeholder="ex: EL AMRANI"
+                        placeholder="ex: Saadaoui"
                       />
                     </div>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="prenom">Prenom</label>
+                    <label htmlFor="prenom">Prénom</label>
                     <div className="input-icon">
                       <User size={17} />
                       <input
@@ -129,14 +129,14 @@ export default function StudentLogin() {
                         value={form.prenom}
                         onChange={(e) => updateField('prenom', e.target.value)}
                         disabled={!isOpen || submitting}
-                        placeholder="ex: Yassine"
+                        placeholder="ex: Yahya"
                       />
                     </div>
                   </div>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="cne">CNE (Code National de l'Etudiant)</label>
+                  <label htmlFor="cne">CNE (Code National de l'Étudiant)</label>
                   <div className="input-icon">
                     <Hash size={17} />
                     <input
@@ -155,7 +155,7 @@ export default function StudentLogin() {
                     <span className="spinner" />
                   ) : (
                     <>
-                      Acceder a l'examen
+                      Accéder à l'examen
                       <ArrowRight size={17} />
                     </>
                   )}

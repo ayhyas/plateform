@@ -28,7 +28,7 @@ export default function AdminResults() {
       setStudents(res.data.students);
       setError(null);
     } catch (err) {
-      setError(err.response?.data?.message || 'Erreur lors du chargement des resultats.');
+      setError(err.response?.data?.message || 'Erreur lors du chargement des résultats.');
     } finally {
       setLoading(false);
     }
@@ -84,7 +84,7 @@ export default function AdminResults() {
   }
 
   async function handleDelete(id) {
-    if (!window.confirm('Supprimer cette tentative ? Cela permettra a cet etudiant de repasser l\'examen.')) return;
+    if (!window.confirm("Supprimer cette tentative ? Cela permettra à cet étudiant de repasser l'examen.")) return;
     try {
       await api.delete(`/admin/students/${id}`);
       setStudents((prev) => prev.filter((s) => s.id !== id));
@@ -99,8 +99,8 @@ export default function AdminResults() {
     <div>
       <div className="toolbar">
         <div>
-          <h2 className="section-title">Resultats des etudiants</h2>
-          <p className="muted">Suivi en temps reel des tentatives et des notes.</p>
+          <h2 className="section-title">Résultats des étudiants</h2>
+          <p className="muted">Suivi en temps réel des tentatives et des notes.</p>
         </div>
         <button className="btn btn-gold" onClick={handleExport} disabled={exporting || students.length === 0}>
           {exporting ? (
@@ -125,7 +125,7 @@ export default function AdminResults() {
         <div className="stat-card">
           <div>
             <div className="value">{stats.total}</div>
-            <div className="label">Etudiants</div>
+            <div className="label">Étudiants</div>
           </div>
           <div className="stat-icon">
             <Users size={20} />
@@ -134,7 +134,7 @@ export default function AdminResults() {
         <div className="stat-card">
           <div>
             <div className="value">{stats.completed}</div>
-            <div className="label">Examens termines</div>
+            <div className="label">Examens terminés</div>
           </div>
           <div className="stat-icon gold">
             <CircleCheck size={20} />
@@ -152,7 +152,7 @@ export default function AdminResults() {
         <div className="stat-card">
           <div>
             <div className="value value-success">{stats.passed}</div>
-            <div className="label">Reussi(s)</div>
+            <div className="label">Réussi(s)</div>
           </div>
           <div className="stat-icon success">
             <CircleCheck size={20} />
@@ -161,7 +161,7 @@ export default function AdminResults() {
         <div className="stat-card">
           <div>
             <div className="value value-danger">{stats.failed}</div>
-            <div className="label">Echoue(s)</div>
+            <div className="label">Échoué(s)</div>
           </div>
           <div className="stat-icon danger">
             <CircleX size={20} />
@@ -174,7 +174,7 @@ export default function AdminResults() {
           <Search size={16} />
           <input
             type="text"
-            placeholder="Rechercher par nom, prenom ou CNE..."
+            placeholder="Rechercher par nom, prénom ou CNE..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -182,8 +182,8 @@ export default function AdminResults() {
         <div className="segmented">
           {[
             { key: 'all', label: 'Tous' },
-            { key: 'passed', label: 'Reussis' },
-            { key: 'failed', label: 'Echoues' },
+            { key: 'passed', label: 'Réussis' },
+            { key: 'failed', label: 'Échoués' },
             { key: 'inprogress', label: 'En cours' },
           ].map((f) => (
             <button
@@ -203,7 +203,7 @@ export default function AdminResults() {
           <thead>
             <tr>
               <th>Nom</th>
-              <th>Prenom</th>
+              <th>Prénom</th>
               <th>CNE</th>
               <th>Note</th>
               <th>Statut</th>
@@ -219,7 +219,7 @@ export default function AdminResults() {
                     <div className="empty-icon">
                       <Inbox size={24} />
                     </div>
-                    <div className="empty-title">Aucun etudiant trouve.</div>
+                    <div className="empty-title">Aucun étudiant trouvé.</div>
                   </div>
                 </td>
               </tr>
@@ -236,9 +236,9 @@ export default function AdminResults() {
                   {s.status !== 'completed' ? (
                     <span className="badge badge-neutral">En cours</span>
                   ) : s.passed ? (
-                    <span className="badge badge-success">Reussi</span>
+                    <span className="badge badge-success">Réussi</span>
                   ) : (
-                    <span className="badge badge-danger">Echoue</span>
+                    <span className="badge badge-danger">Échoué</span>
                   )}
                 </td>
                 <td>{new Date(s.completedAt || s.startedAt).toLocaleString('fr-FR')}</td>

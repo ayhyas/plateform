@@ -23,7 +23,7 @@ export default function AdminLayout() {
         <div className="admin-tabs">
           <NavLink to="/admin/resultats" className={({ isActive }) => `admin-tab${isActive ? ' active' : ''}`}>
             <ChartColumn size={16} />
-            Resultats
+            Résultats
           </NavLink>
           <NavLink to="/admin/questions" className={({ isActive }) => `admin-tab${isActive ? ' active' : ''}`}>
             <ListChecks size={16} />
@@ -31,12 +31,12 @@ export default function AdminLayout() {
           </NavLink>
           <NavLink to="/admin/parametres" className={({ isActive }) => `admin-tab${isActive ? ' active' : ''}`}>
             <Settings size={16} />
-            Parametres
+            Paramètres
           </NavLink>
         </div>
         <button className="btn btn-nav btn-sm" onClick={handleLogout}>
           <LogOut size={15} />
-          Deconnexion
+          Déconnexion
         </button>
       </div>
       <div className="admin-body">

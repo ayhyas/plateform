@@ -30,15 +30,15 @@ export default function AdminLogin() {
       <div className="institution-header">
         <span className="top-hairline" aria-hidden="true" />
         <CrestIcon className="crest" />
-        <div className="university">Universite Chouaib Doukali</div>
-        <div className="faculty">Faculte des Sciences</div>
+        <div className="university">Université Chouaïb Doukkali</div>
+        <div className="faculty">Faculté des Sciences</div>
         <div className="header-divider">
           <span className="divider-line" />
           <span className="divider-dot" />
           <span className="divider-line right" />
         </div>
         <div className="exam-title">Espace Administrateur</div>
-        <div className="degree">Examen de Data Science</div>
+        <div className="degree">Examen de Data Science · Pr A. Aaroud</div>
       </div>
       <div className="page-content">
         <div className="container" style={{ maxWidth: 420 }}>

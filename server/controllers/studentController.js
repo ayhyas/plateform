@@ -15,6 +15,7 @@ function publicSettings(settings) {
     university: settings.university,
     faculty: settings.faculty,
     degree: settings.degree,
+    professor: settings.professor,
     durationMinutes: settings.durationMinutes,
     totalQuestions: settings.totalQuestions,
   };
@@ -35,7 +36,7 @@ async function getStatus(req, res) {
     message = `L'examen ouvrira le ${settings.startAt.toLocaleString('fr-FR')}.`;
     isOpen = false;
   } else if (settings.endAt && now > settings.endAt) {
-    message = "La periode de l'examen est terminee.";
+    message = "La période de l'examen est terminée.";
     isOpen = false;
   }
 
@@ -49,7 +50,7 @@ async function login(req, res) {
   const cne = sanitizeCNE(req.body.cne);
 
   if (!nom || !prenom || !cne) {
-    return res.status(400).json({ message: 'Nom, prenom et CNE sont requis.' });
+    return res.status(400).json({ message: 'Nom, prénom et CNE sont requis.' });
   }
 
   const settings = await ExamSettings.getSingleton();
@@ -62,18 +63,18 @@ async function login(req, res) {
     return res.status(403).json({ message: `L'examen ouvrira le ${settings.startAt.toLocaleString('fr-FR')}.` });
   }
   if (settings.endAt && now > settings.endAt) {
-    return res.status(403).json({ message: "La periode de l'examen est terminee." });
+    return res.status(403).json({ message: "La période de l'examen est terminée." });
   }
 
   let attempt = await Attempt.findOne({ cne });
 
   if (attempt) {
     if (attempt.status === 'completed') {
-      return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Vous avez deja passe cet examen.' });
+      return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Vous avez déjà passé cet examen.' });
     }
     if (attempt.isExpired()) {
       await finalizeAttempt(attempt);
-      return res.status(409).json({ code: 'ALREADY_COMPLETED', message: "Le temps imparti pour votre tentative precedente est ecoule." });
+      return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Le temps imparti pour votre tentative précédente est écoulé.' });
     }
     // Resume existing in-progress attempt.
     const token = signStudentToken(attempt._id);
@@ -114,7 +115,7 @@ async function login(req, res) {
     });
   } catch (err) {
     if (err.code === 11000) {
-      return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Une tentative existe deja pour ce CNE.' });
+      return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Une tentative existe déjà pour ce CNE.' });
     }
     throw err;
   }
@@ -143,17 +144,17 @@ async function getCurrentQuestion(req, res) {
   const attempt = req.attempt;
 
   if (attempt.status === 'completed') {
-    return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Examen deja termine.' });
+    return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Examen déjà terminé.' });
   }
 
   if (attempt.isExpired()) {
     await finalizeAttempt(attempt);
-    return res.status(409).json({ code: 'TIME_UP', message: 'Le temps imparti est ecoule.' });
+    return res.status(409).json({ code: 'TIME_UP', message: 'Le temps imparti est écoulé.' });
   }
 
   if (attempt.currentIndex >= attempt.totalQuestions) {
     await finalizeAttempt(attempt);
-    return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Examen deja termine.' });
+    return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Examen déjà terminé.' });
   }
 
   const question = await loadCurrentQuestion(attempt);
@@ -172,17 +173,17 @@ async function submitAnswer(req, res) {
   const { choiceIndex } = req.body;
 
   if (attempt.status === 'completed') {
-    return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Examen deja termine.' });
+    return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Examen déjà terminé.' });
   }
 
   if (attempt.isExpired()) {
     await finalizeAttempt(attempt);
-    return res.status(409).json({ code: 'TIME_UP', message: 'Le temps imparti est ecoule.' });
+    return res.status(409).json({ code: 'TIME_UP', message: 'Le temps imparti est écoulé.' });
   }
 
   if (attempt.currentIndex >= attempt.totalQuestions) {
     await finalizeAttempt(attempt);
-    return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Examen deja termine.' });
+    return res.status(409).json({ code: 'ALREADY_COMPLETED', message: 'Examen déjà terminé.' });
   }
 
   const entry = attempt.questionOrder[attempt.currentIndex];
@@ -191,7 +192,7 @@ async function submitAnswer(req, res) {
     choiceIndex < 0 ||
     choiceIndex >= entry.choiceOrder.length
   ) {
-    return res.status(400).json({ message: 'Reponse invalide.' });
+    return res.status(400).json({ message: 'Réponse invalide.' });
   }
 
   const question = await Question.findById(entry.questionId);

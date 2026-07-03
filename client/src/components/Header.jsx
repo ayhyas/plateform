@@ -1,15 +1,16 @@
 export function CrestIcon({ className = '' }) {
   return (
     <span className={`crest-badge ${className}`}>
-      <img src="/logo.png" alt="Universite Chouaib Doukali" className="crest-img" />
+      <img src="/logo.png" alt="Université Chouaïb Doukkali" className="crest-img" />
     </span>
   );
 }
 
 export default function Header({ settings }) {
-  const university = settings?.university || 'Universite Chouaib Doukali';
-  const faculty = settings?.faculty || 'Faculte des Sciences';
+  const university = settings?.university || 'Université Chouaïb Doukkali';
+  const faculty = settings?.faculty || 'Faculté des Sciences';
   const degree = settings?.degree || 'Licence';
+  const professor = settings?.professor || 'Pr A. Aaroud';
   const title = settings?.title || 'Examen de Data Science';
 
   return (
@@ -24,7 +25,9 @@ export default function Header({ settings }) {
         <span className="divider-line right" />
       </div>
       <div className="exam-title">{title}</div>
-      <div className="degree">{degree}</div>
+      <div className="degree">
+        {degree} · {professor}
+      </div>
     </div>
   );
 }

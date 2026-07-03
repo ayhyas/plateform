@@ -40,7 +40,7 @@ function QuestionModal({ initial, onClose, onSave }) {
     const choices = form.choices.map((c) => c.trim());
 
     if (!text) return setError('Le texte de la question est requis.');
-    if (choices.some((c) => !c)) return setError('Tous les choix doivent etre remplis.');
+    if (choices.some((c) => !c)) return setError('Tous les choix doivent être remplis.');
 
     setSaving(true);
     try {
@@ -77,7 +77,7 @@ function QuestionModal({ initial, onClose, onSave }) {
           </div>
 
           <div className="form-group">
-            <label>Choix (selectionnez la bonne reponse)</label>
+            <label>Choix (sélectionnez la bonne réponse)</label>
             {form.choices.map((choice, idx) => (
               <div key={idx} className="choice-edit-row">
                 <input
@@ -180,7 +180,7 @@ export default function AdminQuestions() {
   }
 
   async function handleDelete(id) {
-    if (!window.confirm('Supprimer cette question definitivement ?')) return;
+    if (!window.confirm('Supprimer cette question définitivement ?')) return;
     await api.delete(`/admin/questions/${id}`);
     load();
   }
@@ -195,7 +195,7 @@ export default function AdminQuestions() {
         <div>
           <h2 className="section-title">Banque de questions</h2>
           <p className="muted">
-            {questions.length} question(s) au total - {activeCount} active(s) et utilisees dans l'examen.
+            {questions.length} question(s) au total – {activeCount} active(s) et utilisée(s) dans l'examen.
           </p>
         </div>
         <button className="btn btn-primary" onClick={() => setModalQuestion(null)}>
@@ -231,7 +231,7 @@ export default function AdminQuestions() {
                     </div>
                     <div className="empty-title">Aucune question pour le moment.</div>
                     <div className="empty-text">
-                      Cliquez sur « Nouvelle question » pour commencer a construire la banque de
+                      Cliquez sur « Nouvelle question » pour commencer à construire la banque de
                       questions de l'examen.
                     </div>
                   </div>

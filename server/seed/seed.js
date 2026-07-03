@@ -11,15 +11,15 @@ async function seed() {
 
   const existingCount = await Question.countDocuments();
   if (existingCount > 0) {
-    console.log(`La banque de questions contient deja ${existingCount} question(s). Aucune question ajoutee.`);
+    console.log(`La banque de questions contient déjà ${existingCount} question(s). Aucune question ajoutée.`);
   } else {
     const docs = questions.map((q, idx) => ({ ...q, order: idx }));
     await Question.insertMany(docs);
-    console.log(`${docs.length} questions inserees avec succes.`);
+    console.log(`${docs.length} questions insérées avec succès.`);
   }
 
   const settings = await ExamSettings.getSingleton();
-  console.log('Parametres de l\'examen (existants ou par defaut) :', {
+  console.log('Paramètres de l\'examen (existants ou par défaut) :', {
     title: settings.title,
     durationMinutes: settings.durationMinutes,
     totalQuestions: settings.totalQuestions,
@@ -28,7 +28,7 @@ async function seed() {
   });
 
   await mongoose.disconnect();
-  console.log('Seed termine.');
+  console.log('Seed terminé.');
 }
 
 seed().catch((err) => {

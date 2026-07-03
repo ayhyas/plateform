@@ -8,15 +8,19 @@ const examSettingsSchema = new mongoose.Schema(
     },
     university: {
       type: String,
-      default: 'Universite Chouaib Doukali',
+      default: 'Université Chouaïb Doukkali',
     },
     faculty: {
       type: String,
-      default: 'Faculte des Sciences',
+      default: 'Faculté des Sciences',
     },
     degree: {
       type: String,
       default: 'Licence',
+    },
+    professor: {
+      type: String,
+      default: 'Pr A. Aaroud',
     },
     startAt: {
       type: Date,

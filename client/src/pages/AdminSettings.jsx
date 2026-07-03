@@ -21,7 +21,7 @@ export default function AdminSettings() {
     api
       .get('/admin/settings')
       .then((res) => setForm(res.data.settings))
-      .catch(() => setError('Erreur lors du chargement des parametres.'))
+      .catch(() => setError('Erreur lors du chargement des paramètres.'))
       .finally(() => setLoading(false));
   }, []);
 
@@ -46,7 +46,7 @@ export default function AdminSettings() {
       };
       const res = await api.put('/admin/settings', payload);
       setForm(res.data.settings);
-      setSuccess('Parametres enregistres avec succes.');
+      setSuccess('Paramètres enregistrés avec succès.');
     } catch (err) {
       setError(err.response?.data?.message || "Erreur lors de l'enregistrement.");
     } finally {
@@ -60,8 +60,8 @@ export default function AdminSettings() {
     <div>
       <div className="toolbar">
         <div>
-          <h2 className="section-title">Parametres de l'examen</h2>
-          <p className="muted">Configurez la fenetre d'acces, la duree et le bareme de reussite.</p>
+          <h2 className="section-title">Paramètres de l'examen</h2>
+          <p className="muted">Configurez la fenêtre d'accès, la durée et le barème de réussite.</p>
         </div>
       </div>
 
@@ -87,18 +87,24 @@ export default function AdminSettings() {
 
           <div className="field-row">
             <div className="form-group">
-              <label>Universite</label>
+              <label>Université</label>
               <input type="text" value={form.university} onChange={(e) => update('university', e.target.value)} />
             </div>
             <div className="form-group">
-              <label>Faculte</label>
+              <label>Faculté</label>
               <input type="text" value={form.faculty} onChange={(e) => update('faculty', e.target.value)} />
             </div>
           </div>
 
-          <div className="form-group">
-            <label>Diplome / Filiere</label>
-            <input type="text" value={form.degree} onChange={(e) => update('degree', e.target.value)} />
+          <div className="field-row">
+            <div className="form-group">
+              <label>Diplôme / Filière</label>
+              <input type="text" value={form.degree} onChange={(e) => update('degree', e.target.value)} />
+            </div>
+            <div className="form-group">
+              <label>Professeur responsable</label>
+              <input type="text" value={form.professor || ''} onChange={(e) => update('professor', e.target.value)} />
+            </div>
           </div>
 
           <div className="field-row">
@@ -122,7 +128,7 @@ export default function AdminSettings() {
 
           <div className="field-row">
             <div className="form-group">
-              <label>Duree (minutes)</label>
+              <label>Durée (minutes)</label>
               <input
                 type="number"
                 min="1"
@@ -143,7 +149,7 @@ export default function AdminSettings() {
 
           <div className="field-row">
             <div className="form-group">
-              <label>Note minimale de reussite (sur {form.totalQuestions})</label>
+              <label>Note minimale de réussite (sur {form.totalQuestions})</label>
               <input
                 type="number"
                 min="0"
@@ -164,7 +170,7 @@ export default function AdminSettings() {
           </div>
 
           <button type="submit" className="btn btn-primary" disabled={saving}>
-            {saving ? <span className="spinner" /> : 'Enregistrer les parametres'}
+            {saving ? <span className="spinner" /> : 'Enregistrer les paramètres'}
           </button>
         </form>
       </div>

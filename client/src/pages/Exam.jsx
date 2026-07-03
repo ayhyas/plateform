@@ -62,7 +62,7 @@ export default function Exam() {
         navigate('/');
         return;
       }
-      setError("Impossible de charger la question. Verifiez votre connexion.");
+      setError('Impossible de charger la question. Vérifiez votre connexion.');
     } finally {
       setLoading(false);
     }
@@ -118,7 +118,7 @@ export default function Exam() {
         finishAndRedirect(code === 'TIME_UP' ? 'time_up' : 'already');
         return;
       }
-      setError("Impossible d'enregistrer votre reponse. Reessayez.");
+      setError("Impossible d'enregistrer votre réponse. Réessayez.");
       setSubmitting(false);
     }
   }
@@ -170,7 +170,7 @@ export default function Exam() {
             {justSubmitted && (
               <div className="alert alert-success">
                 <CircleCheck size={18} />
-                <span>Reponse enregistree</span>
+                <span>Réponse enregistrée</span>
               </div>
             )}
 

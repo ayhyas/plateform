@@ -7,7 +7,7 @@ async function buildResultsWorkbook(attempts, settings) {
   workbook.creator = 'Plateforme Examen Data Science';
   workbook.created = new Date();
 
-  const sheet = workbook.addWorksheet('Resultats');
+  const sheet = workbook.addWorksheet('Résultats');
 
   sheet.mergeCells('A1:F1');
   sheet.getCell('A1').value = settings.university;
@@ -20,7 +20,7 @@ async function buildResultsWorkbook(attempts, settings) {
   sheet.getCell('A2').alignment = { horizontal: 'center' };
 
   sheet.mergeCells('A3:F3');
-  sheet.getCell('A3').value = `${settings.title} - Resultats des etudiants`;
+  sheet.getCell('A3').value = `${settings.title} - Résultats des étudiants`;
   sheet.getCell('A3').font = { italic: true, size: 11 };
   sheet.getCell('A3').alignment = { horizontal: 'center' };
 
@@ -28,7 +28,7 @@ async function buildResultsWorkbook(attempts, settings) {
 
   const headerRow = sheet.addRow([
     'Nom',
-    'Prenom',
+    'Prénom',
     'CNE',
     `Note / ${settings.totalQuestions}`,
     'Statut',
@@ -51,7 +51,7 @@ async function buildResultsWorkbook(attempts, settings) {
       attempt.prenom,
       attempt.cne,
       attempt.status === 'completed' ? attempt.score : 'En cours',
-      attempt.status !== 'completed' ? 'En cours' : passed ? 'Reussi' : 'Echoue',
+      attempt.status !== 'completed' ? 'En cours' : passed ? 'Réussi' : 'Échoué',
       attempt.completedAt
         ? new Date(attempt.completedAt).toLocaleString('fr-FR')
         : new Date(attempt.startedAt).toLocaleString('fr-FR'),

@@ -1,6 +1,6 @@
 /* =============================================================
    Design system — Examen Data Science
-   Universite Chouaib Doukali · Faculte des Sciences
+   Université Chouaïb Doukkali · Faculté des Sciences
    Palette: deep navy / brass gold / warm paper
    Type: Playfair Display (display) + Inter (UI)
    Spacing: 8px scale · Radius scale · 3 shadow elevations
@@ -203,7 +203,7 @@ svg {
   overflow: hidden;
   background: linear-gradient(160deg, var(--navy-950) 0%, var(--navy-800) 90%, var(--navy-700) 130%);
   color: white;
-  padding: 38px 20px 34px;
+  padding: 22px 20px 20px;
   text-align: center;
 }
 
@@ -266,26 +266,26 @@ svg {
 }
 
 .institution-header .crest {
-  width: 76px;
-  height: 76px;
-  margin: 0 auto 16px;
-  padding: 10px;
-  border-radius: var(--radius-md);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(210, 172, 71, 0.5),
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 10px;
+  padding: 7px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(210, 172, 71, 0.5),
     inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
 .institution-header .university {
   font-family: var(--font-serif);
-  font-size: 1.22rem;
+  font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: 0.4px;
   color: white;
 }
 
 .institution-header .faculty {
-  margin-top: 3px;
-  font-size: 0.85rem;
+  margin-top: 2px;
+  font-size: 0.78rem;
   color: rgba(223, 231, 241, 0.82);
   font-weight: 400;
   letter-spacing: 0.4px;
@@ -295,9 +295,9 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin: 18px auto 16px;
-  max-width: 230px;
+  gap: 8px;
+  margin: 11px auto 9px;
+  max-width: 200px;
 }
 
 .header-divider .divider-line {
@@ -321,7 +321,7 @@ svg {
 
 .institution-header .exam-title {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
+  font-size: 1.38rem;
   font-weight: 700;
   color: var(--gold-300);
   letter-spacing: 0.3px;
@@ -329,11 +329,11 @@ svg {
 }
 
 .institution-header .degree {
-  margin-top: 8px;
-  font-size: 0.74rem;
+  margin-top: 6px;
+  font-size: 0.68rem;
   color: rgba(223, 231, 241, 0.75);
   text-transform: uppercase;
-  letter-spacing: 2.6px;
+  letter-spacing: 1.6px;
   font-weight: 500;
 }
 
@@ -1482,17 +1482,17 @@ td.cell-score {
   }
 
   .institution-header {
-    padding: 30px 16px 28px;
+    padding: 18px 16px 16px;
   }
 
   .institution-header .exam-title {
-    font-size: 1.28rem;
+    font-size: 1.2rem;
   }
 
   .institution-header .crest {
-    width: 64px;
-    height: 64px;
-    padding: 8px;
+    width: 46px;
+    height: 46px;
+    padding: 6px;
   }
 
   .question-text {
