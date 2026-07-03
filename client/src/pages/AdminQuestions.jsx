@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CircleAlert, Inbox, Pencil, Plus, Trash2, X } from 'lucide-react';
 import api from '../services/api.js';
 import Loader from '../components/Loader.jsx';
 
@@ -53,8 +54,18 @@ function QuestionModal({ initial, onClose, onSave }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-        <h3 className="mb-16">{initial ? 'Modifier la question' : 'Nouvelle question'}</h3>
-        {error && <div className="alert alert-error">{error}</div>}
+        <div className="modal-header">
+          <h3>{initial ? 'Modifier la question' : 'Nouvelle question'}</h3>
+          <button type="button" className="modal-close" onClick={onClose} aria-label="Fermer">
+            <X size={18} />
+          </button>
+        </div>
+        {error && (
+          <div className="alert alert-error">
+            <CircleAlert size={18} />
+            <span>{error}</span>
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Texte de la question</label>
@@ -68,7 +79,7 @@ function QuestionModal({ initial, onClose, onSave }) {
           <div className="form-group">
             <label>Choix (selectionnez la bonne reponse)</label>
             {form.choices.map((choice, idx) => (
-              <div key={idx} style={{ display: 'flex', gap: 8, marginBottom: 8, alignItems: 'center' }}>
+              <div key={idx} className="choice-edit-row">
                 <input
                   type="radio"
                   name="correctIndex"
@@ -80,18 +91,23 @@ function QuestionModal({ initial, onClose, onSave }) {
                   value={choice}
                   onChange={(e) => updateChoice(idx, e.target.value)}
                   placeholder={`Choix ${String.fromCharCode(65 + idx)}`}
-                  style={{ flex: 1 }}
                 />
                 {form.choices.length > 2 && (
-                  <button type="button" className="btn btn-outline btn-sm" onClick={() => removeChoice(idx)}>
-                    ×
+                  <button
+                    type="button"
+                    className="choice-remove"
+                    onClick={() => removeChoice(idx)}
+                    aria-label="Supprimer ce choix"
+                  >
+                    <X size={16} />
                   </button>
                 )}
               </div>
             ))}
             {form.choices.length < 6 && (
               <button type="button" className="btn btn-outline btn-sm mt-8" onClick={addChoice}>
-                + Ajouter un choix
+                <Plus size={14} />
+                Ajouter un choix
               </button>
             )}
           </div>
@@ -117,7 +133,7 @@ function QuestionModal({ initial, onClose, onSave }) {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+          <div className="modal-actions">
             <button type="button" className="btn btn-outline" onClick={onClose} disabled={saving}>
               Annuler
             </button>
@@ -183,11 +199,17 @@ export default function AdminQuestions() {
           </p>
         </div>
         <button className="btn btn-primary" onClick={() => setModalQuestion(null)}>
-          + Nouvelle question
+          <Plus size={16} />
+          Nouvelle question
         </button>
       </div>
 
-      {error && <div className="alert alert-error">{error}</div>}
+      {error && (
+        <div className="alert alert-error">
+          <CircleAlert size={18} />
+          <span>{error}</span>
+        </div>
+      )}
 
       <div className="table-wrapper">
         <table>
@@ -200,6 +222,22 @@ export default function AdminQuestions() {
             </tr>
           </thead>
           <tbody>
+            {questions.length === 0 && (
+              <tr>
+                <td colSpan={4} style={{ whiteSpace: 'normal' }}>
+                  <div className="empty-state">
+                    <div className="empty-icon">
+                      <Inbox size={24} />
+                    </div>
+                    <div className="empty-title">Aucune question pour le moment.</div>
+                    <div className="empty-text">
+                      Cliquez sur « Nouvelle question » pour commencer a construire la banque de
+                      questions de l'examen.
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            )}
             {questions.map((q) => (
               <tr key={q._id}>
                 <td style={{ whiteSpace: 'normal', maxWidth: 480 }}>{q.text}</td>
@@ -212,11 +250,13 @@ export default function AdminQuestions() {
                   )}
                 </td>
                 <td>
-                  <div style={{ display: 'flex', gap: 8 }}>
+                  <div className="row-actions">
                     <button className="btn btn-outline btn-sm" onClick={() => setModalQuestion(q)}>
+                      <Pencil size={14} />
                       Modifier
                     </button>
-                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(q._id)}>
+                    <button className="btn btn-ghost-danger btn-sm" onClick={() => handleDelete(q._id)}>
+                      <Trash2 size={14} />
                       Supprimer
                     </button>
                   </div>

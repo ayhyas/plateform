@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CircleAlert, Lock, User } from 'lucide-react';
 import api, { setAdminToken } from '../services/api.js';
 import { CrestIcon } from '../components/Header.jsx';
 
@@ -42,29 +43,40 @@ export default function AdminLogin() {
         <div className="container" style={{ maxWidth: 420 }}>
           <div className="card">
             <h2 className="mb-16">Connexion administrateur</h2>
-            {error && <div className="alert alert-error">{error}</div>}
+            {error && (
+              <div className="alert alert-error">
+                <CircleAlert size={18} />
+                <span>{error}</span>
+              </div>
+            )}
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="username">Identifiant</label>
-                <input
-                  id="username"
-                  type="text"
-                  autoComplete="username"
-                  value={form.username}
-                  onChange={(e) => setForm((f) => ({ ...f, username: e.target.value }))}
-                  disabled={submitting}
-                />
+                <div className="input-icon">
+                  <User size={17} />
+                  <input
+                    id="username"
+                    type="text"
+                    autoComplete="username"
+                    value={form.username}
+                    onChange={(e) => setForm((f) => ({ ...f, username: e.target.value }))}
+                    disabled={submitting}
+                  />
+                </div>
               </div>
               <div className="form-group">
                 <label htmlFor="password">Mot de passe</label>
-                <input
-                  id="password"
-                  type="password"
-                  autoComplete="current-password"
-                  value={form.password}
-                  onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
-                  disabled={submitting}
-                />
+                <div className="input-icon">
+                  <Lock size={17} />
+                  <input
+                    id="password"
+                    type="password"
+                    autoComplete="current-password"
+                    value={form.password}
+                    onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
+                    disabled={submitting}
+                  />
+                </div>
               </div>
               <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
                 {submitting ? <span className="spinner" /> : 'Se connecter'}

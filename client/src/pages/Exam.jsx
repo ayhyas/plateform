@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Check, CircleAlert, CircleCheck, Clock } from 'lucide-react';
 import api, { getStudentToken, setStudentToken } from '../services/api.js';
 import Header from '../components/Header.jsx';
 import Loader from '../components/Loader.jsx';
@@ -149,7 +150,10 @@ export default function Exam() {
                 Question {index + 1} / {total}
               </div>
             </div>
-            <div className={`timer ${remaining < 60 ? 'timer-warning' : ''}`}>{formatTime(remaining)}</div>
+            <div className={`timer ${remaining < 60 ? 'timer-warning' : ''}`}>
+              <Clock size={15} />
+              {formatTime(remaining)}
+            </div>
           </div>
 
           <div className="progress-track">
@@ -157,8 +161,18 @@ export default function Exam() {
           </div>
 
           <div className="card">
-            {error && <div className="alert alert-error">{error}</div>}
-            {justSubmitted && <div className="alert alert-success">Reponse enregistree ✓</div>}
+            {error && (
+              <div className="alert alert-error">
+                <CircleAlert size={18} />
+                <span>{error}</span>
+              </div>
+            )}
+            {justSubmitted && (
+              <div className="alert alert-success">
+                <CircleCheck size={18} />
+                <span>Reponse enregistree</span>
+              </div>
+            )}
 
             {question && (
               <>
@@ -172,6 +186,7 @@ export default function Exam() {
                     >
                       <span className="choice-marker">{String.fromCharCode(65 + idx)}</span>
                       <span className="choice-label">{choice}</span>
+                      {selected === idx && <Check size={18} className="choice-check" />}
                     </div>
                   ))}
                 </div>
@@ -180,7 +195,19 @@ export default function Exam() {
                   disabled={selected === null || submitting}
                   onClick={handleNext}
                 >
-                  {submitting ? <span className="spinner" /> : index + 1 === total ? 'Terminer' : 'Suivant'}
+                  {submitting ? (
+                    <span className="spinner" />
+                  ) : index + 1 === total ? (
+                    <>
+                      Terminer
+                      <Check size={17} />
+                    </>
+                  ) : (
+                    <>
+                      Suivant
+                      <ArrowRight size={17} />
+                    </>
+                  )}
                 </button>
               </>
             )}

@@ -1,4 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
+import {
+  CircleAlert,
+  CircleCheck,
+  CircleX,
+  FileSpreadsheet,
+  Hourglass,
+  Inbox,
+  Search,
+  Trash2,
+  Users,
+} from 'lucide-react';
 import api from '../services/api.js';
 import Loader from '../components/Loader.jsx';
 
@@ -92,67 +103,97 @@ export default function AdminResults() {
           <p className="muted">Suivi en temps reel des tentatives et des notes.</p>
         </div>
         <button className="btn btn-gold" onClick={handleExport} disabled={exporting || students.length === 0}>
-          {exporting ? <span className="spinner" /> : 'Exporter en Excel'}
+          {exporting ? (
+            <span className="spinner" />
+          ) : (
+            <>
+              <FileSpreadsheet size={16} />
+              Exporter en Excel
+            </>
+          )}
         </button>
       </div>
 
-      {error && <div className="alert alert-error">{error}</div>}
+      {error && (
+        <div className="alert alert-error">
+          <CircleAlert size={18} />
+          <span>{error}</span>
+        </div>
+      )}
 
       <div className="stats-row">
         <div className="stat-card">
-          <div className="value">{stats.total}</div>
-          <div className="label">Etudiants</div>
-        </div>
-        <div className="stat-card">
-          <div className="value">{stats.completed}</div>
-          <div className="label">Examens termines</div>
-        </div>
-        <div className="stat-card">
-          <div className="value">{stats.inProgress}</div>
-          <div className="label">En cours</div>
-        </div>
-        <div className="stat-card">
-          <div className="value" style={{ color: 'var(--green-600)' }}>
-            {stats.passed}
+          <div>
+            <div className="value">{stats.total}</div>
+            <div className="label">Etudiants</div>
           </div>
-          <div className="label">Reussi(s)</div>
+          <div className="stat-icon">
+            <Users size={20} />
+          </div>
         </div>
         <div className="stat-card">
-          <div className="value" style={{ color: 'var(--red-600)' }}>
-            {stats.failed}
+          <div>
+            <div className="value">{stats.completed}</div>
+            <div className="label">Examens termines</div>
           </div>
-          <div className="label">Echoue(s)</div>
+          <div className="stat-icon gold">
+            <CircleCheck size={20} />
+          </div>
+        </div>
+        <div className="stat-card">
+          <div>
+            <div className="value">{stats.inProgress}</div>
+            <div className="label">En cours</div>
+          </div>
+          <div className="stat-icon">
+            <Hourglass size={20} />
+          </div>
+        </div>
+        <div className="stat-card">
+          <div>
+            <div className="value value-success">{stats.passed}</div>
+            <div className="label">Reussi(s)</div>
+          </div>
+          <div className="stat-icon success">
+            <CircleCheck size={20} />
+          </div>
+        </div>
+        <div className="stat-card">
+          <div>
+            <div className="value value-danger">{stats.failed}</div>
+            <div className="label">Echoue(s)</div>
+          </div>
+          <div className="stat-icon danger">
+            <CircleX size={20} />
+          </div>
         </div>
       </div>
 
       <div className="toolbar">
-        <input
-          type="text"
-          placeholder="Rechercher par nom, prenom ou CNE..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{
-            padding: '10px 14px',
-            borderRadius: 'var(--radius-sm)',
-            border: '1.5px solid var(--gray-200)',
-            minWidth: 260,
-          }}
-        />
-        <div className="admin-tabs" style={{ background: 'white', borderRadius: 'var(--radius-sm)', padding: 4 }}>
+        <div className="search-box">
+          <Search size={16} />
+          <input
+            type="text"
+            placeholder="Rechercher par nom, prenom ou CNE..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className="segmented">
           {[
             { key: 'all', label: 'Tous' },
             { key: 'passed', label: 'Reussis' },
             { key: 'failed', label: 'Echoues' },
             { key: 'inprogress', label: 'En cours' },
           ].map((f) => (
-            <span
+            <button
               key={f.key}
-              className={`admin-tab ${filter === f.key ? 'active' : ''}`}
-              style={{ color: filter === f.key ? undefined : 'var(--gray-600)' }}
+              type="button"
+              className={filter === f.key ? 'active' : ''}
               onClick={() => setFilter(f.key)}
             >
               {f.label}
-            </span>
+            </button>
           ))}
         </div>
       </div>
@@ -173,17 +214,24 @@ export default function AdminResults() {
           <tbody>
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={7} className="muted" style={{ padding: 24, textAlign: 'center' }}>
-                  Aucun etudiant trouve.
+                <td colSpan={7} style={{ whiteSpace: 'normal' }}>
+                  <div className="empty-state">
+                    <div className="empty-icon">
+                      <Inbox size={24} />
+                    </div>
+                    <div className="empty-title">Aucun etudiant trouve.</div>
+                  </div>
                 </td>
               </tr>
             )}
             {filtered.map((s) => (
               <tr key={s.id}>
-                <td>{s.nom}</td>
+                <td className="cell-strong">{s.nom}</td>
                 <td>{s.prenom}</td>
                 <td>{s.cne}</td>
-                <td>{s.status === 'completed' ? `${s.score} / ${s.totalQuestions}` : '-'}</td>
+                <td className="cell-score">
+                  {s.status === 'completed' ? `${s.score} / ${s.totalQuestions}` : '-'}
+                </td>
                 <td>
                   {s.status !== 'completed' ? (
                     <span className="badge badge-neutral">En cours</span>
@@ -195,9 +243,12 @@ export default function AdminResults() {
                 </td>
                 <td>{new Date(s.completedAt || s.startedAt).toLocaleString('fr-FR')}</td>
                 <td>
-                  <button className="btn btn-outline btn-sm" onClick={() => handleDelete(s.id)}>
-                    Supprimer
-                  </button>
+                  <div className="row-actions">
+                    <button className="btn btn-ghost-danger btn-sm" onClick={() => handleDelete(s.id)}>
+                      <Trash2 size={14} />
+                      Supprimer
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

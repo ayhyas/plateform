@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CircleAlert, CircleCheck } from 'lucide-react';
 import api from '../services/api.js';
 import Loader from '../components/Loader.jsx';
 
@@ -65,8 +66,18 @@ export default function AdminSettings() {
       </div>
 
       <div className="card" style={{ maxWidth: 640 }}>
-        {error && <div className="alert alert-error">{error}</div>}
-        {success && <div className="alert alert-success">{success}</div>}
+        {error && (
+          <div className="alert alert-error">
+            <CircleAlert size={18} />
+            <span>{error}</span>
+          </div>
+        )}
+        {success && (
+          <div className="alert alert-success">
+            <CircleCheck size={18} />
+            <span>{success}</span>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">

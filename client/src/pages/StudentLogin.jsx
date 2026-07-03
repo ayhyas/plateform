@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ArrowRight, CircleAlert, Hash, Info, User } from 'lucide-react';
 import api, { setStudentToken } from '../services/api.js';
 import Header from '../components/Header.jsx';
 import Loader from '../components/Loader.jsx';
@@ -82,7 +83,8 @@ export default function StudentLogin() {
             <div className="card">
               {!isOpen && (
                 <div className="alert alert-info">
-                  {statusMessage || "L'examen n'est pas disponible actuellement."}
+                  <Info size={18} />
+                  <span>{statusMessage || "L'examen n'est pas disponible actuellement."}</span>
                 </div>
               )}
 
@@ -92,50 +94,71 @@ export default function StudentLogin() {
                 acceder a l'examen.
               </p>
 
-              {error && <div className="alert alert-error">{error}</div>}
+              {error && (
+                <div className="alert alert-error">
+                  <CircleAlert size={18} />
+                  <span>{error}</span>
+                </div>
+              )}
 
               <form onSubmit={handleSubmit}>
                 <div className="field-row">
                   <div className="form-group">
                     <label htmlFor="nom">Nom</label>
-                    <input
-                      id="nom"
-                      type="text"
-                      autoComplete="family-name"
-                      value={form.nom}
-                      onChange={(e) => updateField('nom', e.target.value)}
-                      disabled={!isOpen || submitting}
-                      placeholder="ex: EL AMRANI"
-                    />
+                    <div className="input-icon">
+                      <User size={17} />
+                      <input
+                        id="nom"
+                        type="text"
+                        autoComplete="family-name"
+                        value={form.nom}
+                        onChange={(e) => updateField('nom', e.target.value)}
+                        disabled={!isOpen || submitting}
+                        placeholder="ex: EL AMRANI"
+                      />
+                    </div>
                   </div>
                   <div className="form-group">
                     <label htmlFor="prenom">Prenom</label>
-                    <input
-                      id="prenom"
-                      type="text"
-                      autoComplete="given-name"
-                      value={form.prenom}
-                      onChange={(e) => updateField('prenom', e.target.value)}
-                      disabled={!isOpen || submitting}
-                      placeholder="ex: Yassine"
-                    />
+                    <div className="input-icon">
+                      <User size={17} />
+                      <input
+                        id="prenom"
+                        type="text"
+                        autoComplete="given-name"
+                        value={form.prenom}
+                        onChange={(e) => updateField('prenom', e.target.value)}
+                        disabled={!isOpen || submitting}
+                        placeholder="ex: Yassine"
+                      />
+                    </div>
                   </div>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="cne">CNE (Code National de l'Etudiant)</label>
-                  <input
-                    id="cne"
-                    type="text"
-                    value={form.cne}
-                    onChange={(e) => updateField('cne', e.target.value)}
-                    disabled={!isOpen || submitting}
-                    placeholder="ex: R130000000"
-                  />
+                  <div className="input-icon">
+                    <Hash size={17} />
+                    <input
+                      id="cne"
+                      type="text"
+                      value={form.cne}
+                      onChange={(e) => updateField('cne', e.target.value)}
+                      disabled={!isOpen || submitting}
+                      placeholder="ex: R130000000"
+                    />
+                  </div>
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-block" disabled={!isOpen || submitting}>
-                  {submitting ? <span className="spinner" /> : "Acceder a l'examen"}
+                  {submitting ? (
+                    <span className="spinner" />
+                  ) : (
+                    <>
+                      Acceder a l'examen
+                      <ArrowRight size={17} />
+                    </>
+                  )}
                 </button>
               </form>
             </div>

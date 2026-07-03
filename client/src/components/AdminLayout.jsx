@@ -1,4 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { ChartColumn, ListChecks, LogOut, Settings } from 'lucide-react';
 import { setAdminToken } from '../services/api.js';
 import { CrestIcon } from './Header.jsx';
 
@@ -17,20 +18,24 @@ export default function AdminLayout() {
           <CrestIcon className="brand-crest" />
           Examen Data Science
           <span className="dot" />
-          Administration
+          <span className="brand-sub">Administration</span>
         </div>
         <div className="admin-tabs">
           <NavLink to="/admin/resultats" className={({ isActive }) => `admin-tab${isActive ? ' active' : ''}`}>
+            <ChartColumn size={16} />
             Resultats
           </NavLink>
           <NavLink to="/admin/questions" className={({ isActive }) => `admin-tab${isActive ? ' active' : ''}`}>
+            <ListChecks size={16} />
             Questions
           </NavLink>
           <NavLink to="/admin/parametres" className={({ isActive }) => `admin-tab${isActive ? ' active' : ''}`}>
+            <Settings size={16} />
             Parametres
           </NavLink>
         </div>
         <button className="btn btn-nav btn-sm" onClick={handleLogout}>
+          <LogOut size={15} />
           Deconnexion
         </button>
       </div>
