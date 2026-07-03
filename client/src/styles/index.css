@@ -223,7 +223,7 @@ svg {
   pointer-events: none;
 }
 
-/* gold hairline base */
+/* gold hairlines top + bottom, framing the crest */
 .institution-header::after {
   content: "";
   position: absolute;
@@ -234,15 +234,45 @@ svg {
   background: linear-gradient(90deg, var(--gold-600), var(--gold-300) 50%, var(--gold-600));
 }
 
+.institution-header .top-hairline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(210, 172, 71, 0.55) 50%, transparent);
+}
+
 .institution-header > * {
   position: relative;
 }
 
+/* Crest badge — houses the real university logo (white artwork) as a
+   plaque on the dark header/nav, since the source PNG has a white ground. */
+.crest-badge {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.crest-badge .crest-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .institution-header .crest {
-  width: 60px;
-  height: 68px;
-  margin: 0 auto 14px;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 16px;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(210, 172, 71, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
 .institution-header .university {
@@ -1014,8 +1044,11 @@ td.cell-score {
 }
 
 .admin-nav .brand .brand-crest {
-  width: 26px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: var(--radius-xs);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(210, 172, 71, 0.45);
 }
 
 .btn-nav {
@@ -1457,8 +1490,9 @@ td.cell-score {
   }
 
   .institution-header .crest {
-    width: 52px;
-    height: 59px;
+    width: 64px;
+    height: 64px;
+    padding: 8px;
   }
 
   .question-text {

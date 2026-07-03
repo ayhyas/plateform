@@ -28,6 +28,7 @@ export default function AdminLogin() {
   return (
     <div className="page">
       <div className="institution-header">
+        <span className="top-hairline" aria-hidden="true" />
         <CrestIcon className="crest" />
         <div className="university">Universite Chouaib Doukali</div>
         <div className="faculty">Faculte des Sciences</div>
