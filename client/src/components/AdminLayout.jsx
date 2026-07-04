@@ -16,7 +16,7 @@ export default function AdminLayout() {
       <div className="admin-nav">
         <div className="brand">
           <CrestIcon className="brand-crest" />
-          Examen Data Science
+          <span className="brand-title">Examen Data Science</span>
           <span className="dot" />
           <span className="brand-sub">Administration</span>
         </div>
@@ -34,9 +34,9 @@ export default function AdminLayout() {
             Paramètres
           </NavLink>
         </div>
-        <button className="btn btn-nav btn-sm" onClick={handleLogout}>
+        <button className="btn btn-nav btn-sm" onClick={handleLogout} aria-label="Déconnexion">
           <LogOut size={15} />
-          Déconnexion
+          <span className="btn-nav-label">Déconnexion</span>
         </button>
       </div>
       <div className="admin-body">

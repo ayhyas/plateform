@@ -893,8 +893,10 @@ svg {
 /* ---------- Tables ---------- */
 
 .table-wrapper {
+  position: relative;
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   background: var(--surface);
@@ -1025,6 +1027,19 @@ td.cell-score {
   gap: 10px;
   letter-spacing: 0.2px;
   white-space: nowrap;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.admin-nav .brand .brand-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-nav .brand .dot,
+.admin-nav .brand .brand-sub {
+  flex: none;
 }
 
 .admin-nav .brand .dot {
@@ -1468,6 +1483,27 @@ td.cell-score {
     padding: 10px var(--sp-3);
     border-bottom-width: 2px;
     margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-nav .brand .dot,
+  .admin-nav .brand .brand-sub {
+    display: none;
+  }
+
+  .btn-nav-label {
+    display: none;
+  }
+
+  .btn-nav.btn-sm {
+    padding: 8px;
+  }
+
+  .admin-tab {
+    gap: 5px;
+    padding: 10px 8px;
+    font-size: 0.82rem;
   }
 }
 
